@@ -1,0 +1,278 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>大众点评数据展示</title>
+	<link href="/css/new.css" rel="stylesheet" type="text/css" />
+	<link href="/css/jquery-accordion-menu.css" rel="stylesheet" type="text/css" />
+	<link href="/css/font-awesome.css" rel="stylesheet" type="text/css" />
+	<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="/css/zhezhao.css" rel="stylesheet" type="text/css" />
+	<script src="/jquery-3.4.1.min.js"></script>
+	<script src="/jquery-accordion-menu.js" type="text/javascript"></script>
+	<script type="text/javascript">
+
+		$(function(){
+			//顶部导航切换
+			$("#demo-list li").click(function(){
+				$("#demo-list li.active").removeClass("active")
+				$(this).addClass("active");
+			})
+		})
+	</script>
+	<script src="/zhezhao.js"></script>
+	<script src="https://www.amcharts.com/lib/4/core.js"></script>
+	<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+	<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+	<script>
+		am4core.ready(function() {
+
+// Themes begin
+			am4core.useTheme(am4themes_animated);
+// Themes end
+
+// Create chart instance
+			var chart = am4core.create("chartdiv", am4charts.PieChart);
+
+// Add data
+			chart.data = [ {
+				"country": "北京",
+				"litres": 900
+			}, {
+				"country": "上海",
+				"litres": 200
+			}, {
+				"country": "广州",
+				"litres": 300
+			}, {
+				"country": "郑州",
+				"litres": 900
+			}, {
+				"country": "深圳",
+				"litres": 1000
+			}, {
+				"country": "天津",
+				"litres": 400
+			}, {
+				"country": "杭州",
+				"litres": 700
+			}, {
+				"country": "南京",
+				"litres": 1000
+			}, {
+				"country": "苏州",
+				"litres": 1000
+			}, {
+				"country": "成都",
+				"litres": 100
+			}, {
+				"country": "武汉",
+				"litres": 800
+			}, {
+				"country": "重庆",
+				"litres": 500
+			}, {
+				"country": "西安",
+				"litres": 600
+			} ];
+
+// Add and configure Series
+			var pieSeries = chart.series.push(new am4charts.PieSeries());
+			pieSeries.dataFields.value = "litres";
+			pieSeries.dataFields.category = "country";
+			pieSeries.slices.template.stroke = am4core.color("#fff");
+			pieSeries.slices.template.strokeWidth = 2;
+			pieSeries.slices.template.strokeOpacity = 1;
+
+// This creates initial animation
+			pieSeries.hiddenState.properties.opacity = 1;
+			pieSeries.hiddenState.properties.endAngle = -90;
+			pieSeries.hiddenState.properties.startAngle = -90;
+
+		}); // end am4core.ready()
+
+	</script>
+
+</head>
+<body>
+<div style="text-align:center;clear:both">
+
+</div>
+<div id="fill"></div>
+
+<div class="content">
+	<div id="jquery-accordion-menu" class="jquery-accordion-menu red">
+		<div class="jquery-accordion-menu-header" id="form"></div>
+		<ul id="demo-list">
+			<li class="active"><a href="javascript:void(0); " id="getthree"><i class="fa fa-home"></i>拿到300条随机数据 </a></li>
+			<li><a href="javascript:void(0);" id="getall"><i class="fa fa-glass"></i>拿到所有数据 </a></li>
+			<li><a href="javascript:void(0);" id="update"><i class="fa fa-file-image-o"></i>实时更新所有数据 </a><span class="jquery-accordion-menu-label">
+				12 </span></li>
+			<li><a href="#"><i class="fa fa-cog"></i>Services </a>
+				<ul class="submenu">
+					<li><a href="javascript:void(0);"id="bt">美食分布</a></li>
+					<li><a href="javascript:void(0);" id="allcity">各城市均消费 </a></li>
+					<!--<li><a href="javascript:void(0);">Design </a>-->
+						<!--<ul class="submenu">-->
+							<!--<li><a href="#" class="changecity">成都 </a></li>-->
+							<!--<li><a href="#" class="changecity">Vectors </a></li>-->
+							<!--<li><a href="/course/brokenline.html">Photoshop </a></li>-->
+							<!--<li><a href="#">Fonts </a></li>-->
+						<!--</ul>-->
+					<!--</li>-->
+					<!--<li><a href="#">Consulting </a></li>-->
+				</ul>
+			</li>
+			<li><a href="javascript:void(0)" onclick="alert('该功能尚未实现')"><i class="fa fa-home"></i>系统管理 </a></li>
+			<li><a href="#"><i class="fa fa-suitcase"></i>热门城市 </a>
+				<ul class="submenu">
+					<li><a href="#" class="changecity">郑州</a></li>
+					<li><a href="#" class="changecity">北京</a></li>
+					<li><a href="#" class="changecity">上海</a></li>
+					<li><a href="#" class="changecity">广州</a></li>
+					<li><a href="#" class="changecity">深圳</a></li>
+				</ul>
+			</li>
+			<li><a href="#" id="hadoop"><i class="fa fa-user"></i>hadoop实时计算性价比餐厅 </a></li>
+			<li><a href="#"><i class="fa fa-envelope"></i>联系我们 </a></li>
+
+		</ul>
+		<div class="jquery-accordion-menu-footer">
+			Footer
+		</div>
+
+	</div>
+</div>
+<div id="right">
+
+	<table class="table table-bordered table-hover table-condensed" style="background-color: rgb(237 85 101)">
+		<thead>
+		<tr>
+			<th>商铺名称</th>
+			<th>分类名称</th>
+			<th>所在区域名称</th>
+			<th>人均消费</th>
+			<th>口味评分</th>
+			<th>环境评分</th>
+			<th>服务评分</th>
+			<th>商铺星级</th>
+			<th>商铺网址</th>
+			<th>城市</th>
+		</tr>
+		</thead>
+
+		<tbody>
+		<tr th:each="shopattribute:${insertlist}">
+			<td th:text="${shopattribute.shopName}"></td>
+			<td th:text="${shopattribute.mainCategoryName}"></td>
+			<td th:text="${shopattribute.mainRegionName}"></td>
+			<td th:text="${shopattribute.avgPrice}"></td>
+			<td th:text="${shopattribute.refinedScore1}"></td>
+			<td th:text="${shopattribute.refinedScore2}"></td>
+			<td th:text="${shopattribute.refinedScore3}"></td>
+			<td th:text="${shopattribute.shopPower}"></td>
+			<td th:text="${shopattribute.shopUrl}"></td>
+			<td th:text="${shopattribute.city}"></td>
+		</tr>
+			</span>
+		</tbody>
+
+	</table>
+</div>
+
+<div class="zhezhao" id="zhezhao"></div>
+<div class="login" id="login">
+	<button id="btclose">点击关闭</button>
+	<div id="chartdiv"></div>
+</div>
+
+<script type="text/javascript">
+	(function($) {
+		$.expr[":"].Contains = function(a, i, m) {
+			return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+		};
+		function filterList(header, list) {
+			//@header 头部元素
+			//@list 无需列表
+			//创建一个搜素表单
+			var form = $("<form>").attr({
+				"class":"filterform",
+				action:"#"
+			}), input = $("<input>").attr({
+				"class":"filterinput",
+				type:"text"
+			});
+			$(form).append(input).appendTo(header);
+			$(input).change(function() {
+				var filter = $(this).val();
+				if (filter) {
+					$matches = $(list).find("a:Contains(" + filter + ")").parent();
+					$("li", list).not($matches).slideUp();
+					$matches.slideDown();
+				} else {
+					$(list).find("li").slideDown();
+				}
+				return false;
+			}).keyup(function() {
+				$(this).change();
+			});
+		}
+		$(function() {
+			filterList($("#form"), $("#demo-list"));
+		});
+	})(jQuery);
+</script>
+
+<script type="text/javascript">
+
+	jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
+
+</script>
+
+<script type="text/javascript">
+
+	$(function () {
+		console.log('lalala')
+		$("#getthree").on('click',function (e) {
+			$.ajax({}).done(function () {
+				alert("获取数据成功");
+				window.location.href="/getthree";
+			})
+		})
+		$("#allcity").on('click',function (e) {
+			$.ajax({}).done(function () {
+				window.location.href="/avg";
+			})
+		})
+		$("#getall").on('click',function (e) {
+			$.ajax({}).done(function () {
+				alert("获取数据成功");
+				window.location.href="/getall";
+			})
+		})
+		$("#update").on('click',function (e) {
+			$.ajax({}).done(function () {
+				alert("准备重新获取数据");
+				window.location.href="/update";
+			})
+		})
+		$(".changecity").on('click',function (e) {
+			var city = this.text;
+			$.ajax({}).done(function () {
+				alert("获取数据成功")
+				window.location.href="/getcity?city="+city;
+			})
+		})
+		$("#hadoop").on('click',function (e) {
+			var city = this.text;
+			$.ajax({}).done(function () {
+				alert("准备运行hadoop")
+				window.location.href="/hadoop";
+			})
+		})
+	})
+
+</script>
+</form>
+</body>
+</html>

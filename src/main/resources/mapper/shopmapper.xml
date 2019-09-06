@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzq.FourSubject.dao.shopdao">
+    <resultMap id="shopattributes" type="com.zzq.FourSubject.bean.shopattributes" >
+    <result column="shopUrl" property="shopUrl" />
+    <result column="shopName" property="shopName" />
+    <result column="shopId" property="shopId" />
+    <result column="avgPrice" property="avgPrice" />
+    <result column="mainCategoryName" property="mainCategoryName" />
+    <result column="mainRegionName" property="mainRegionName" />
+    <result column="tasteScore" property="refinedScore1" />
+    <result column="environmentScore" property="refinedScore2" />
+    <result column="serviceScore" property="refinedScore3" />
+    <result column="shopPower" property="shopPower" />
+        <result column="city" property="city" />
+    </resultMap>
+
+
+    <select id="getcity"  parameterType="string"  resultMap="shopattributes" >
+        Select * From shop where city = #{city}
+      </select>
+    <select id="getone"  parameterType="string" resultMap="shopattributes">
+        Select * From shop where shopId = #{id}
+      </select>
+    <select id="getall" resultMap="shopattributes" >
+        Select * From shop
+      </select>
+    <select id="getthree" resultMap="shopattributes" >
+          Select * From shop Order By Rand() Limit 300
+      </select>
+    <insert id="insert" parameterType="java.util.List" >
+        insert ignore
+        shop
+        (shopUrl,shopName,shopId,avgPrice,mainCategoryName,mainRegionName,tasteScore,environmentScore,serviceScore,shopPower,city)
+        values
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.shopUrl},#{item.shopName},#{item.shopId},#{item.avgPrice},#{item.mainCategoryName},#{item.mainRegionName},#{item.refinedScore1},#{item.refinedScore2},#{item.refinedScore3},#{item.shopPower},#{item.city})
+        </foreach>
+    </insert>
+
+    <delete id="deleteall">
+		truncate table shop
+	</delete>
+
+</mapper>
